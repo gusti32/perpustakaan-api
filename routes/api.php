@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::controller(AuthController::class)->group(function() {
+    Route::post('/register', 'register');
+    Route::post('/login', 'login');
+    Route::get('/logout', 'logout')->middleware(['auth:sanctum']);
+});
+
+Route::middleware('auth:sanctum')
+    ->controller(CategoryController::class)
+    ->group(function() {
+        Route::get('/category/get', 'get');
+        Route::post('/category/add', 'add');
+        Route::post('/category/edit', 'edit');
+        Route::get('/category/del', 'delete');
+    });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
