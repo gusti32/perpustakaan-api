@@ -74,7 +74,7 @@ class AuthController extends Controller
         }
 
         // Revoke existing token
-        // Any request will fail if user tries to make a request with old token.
+        // Any request will fail if user tries to create a request with old token.
         if ($user->tokens()->count() > 0) {
             $user->tokens()->delete();
         }

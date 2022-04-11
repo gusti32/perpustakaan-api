@@ -43,25 +43,35 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(),
             [
                 'id' => 'required|numeric|exists:categories,id',
-                'name' => 'required|string|unique:categories,name'
+                'name' => 'required|string'
             ],
             [
                 'id.required' => 'Field id harus diisi.',
                 'id.numeric' => 'ID tidak valid.',
                 'id.exists' => 'ID tidak ditemukan.',
 
-                'name.required' => 'Field name harus diisi.',
-                'name.unique' => 'Nama kategori sudah terdaftar, silakan masukkan nama yang berbeda.'
+                'name.required' => 'Field name harus diisi.'
             ]);
 
         if ($validator->fails()) {
             return ['errors' => $validator->errors()];
         }
 
-        $cat = Category::where('id', $request->id);
+        // Find similar category
+        $sameCategory = Category::where('id', '!=', $request->id)
+            ->where('name', $request->name)
+            ->count() > 0;
+
+        // Reject editing if similar categories are found
+        if ($sameCategory) {
+            return ['errors' => ['name' => 'Nama kategori sudah terdaftar, silakan masukkan nama yang berbeda.']];
+        }
+
+        $cat = Category::find($request->id);
+        $catData = $cat;
         $cat->update(['name' => $request->name]);
 
-        return ['msg' => 'Kategori berhasil diubah.', 'updated' => $cat->get()];
+        return ['msg' => 'Kategori berhasil diubah.', 'updated' => $catData];
     }
 
     public function delete(Request $request)
