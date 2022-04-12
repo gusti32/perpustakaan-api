@@ -16,10 +16,10 @@ class CategoryController extends Controller
                 'list' => Category::find($request->id)
             ];
         }
-        else if ($request->name) {
+        else if ($request->keyword) {
             return [
                 'msg' => 'Berhasil',
-                'list' => Category::where('name', 'like', "%{$request->name}%")->get()
+                'list' => Category::where('name', 'like', "%{$request->keyword}%")->get()
             ];
         }
 

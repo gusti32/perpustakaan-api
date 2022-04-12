@@ -13,7 +13,7 @@ Selamat Mencoba!
 ### Menjalankan Server API
 
 1. Clone repositori ini.
-1. Install XAMPP. Pastikan direktori PHP XAMPP sudah ada pada environment variable `PATH`.
+1. Install XAMPP versi terbaru. Pastikan direktori PHP XAMPP sudah ada pada environment variable `PATH`.
 2. Buka XAMPP. Nyalakan Apache dan MySQL.
 3. Buka Phpmyadmin dan buat database baru yang bernama `perpus`.
 4. Buka Command Prompt (CMD) pada direktori project dan jalankan `setup.bat`.
@@ -30,75 +30,6 @@ Berikut adalah cara kerja API ini:
 - Jika pengguna sudah selesai menggunakan API, pengguna dapat me-request logout untuk menghapus token akses.
 - Jika token akses terhapus, maka token akses tersebut tidak dapat digunakan kembali untuk mengakses API.
 
-### API Autentikasi
+## Penggunaan API
 
-- `api/register` (POST):
-
-  Mendaftarkan/membuat akun baru.
-  
-  **Parameter JSON:**
-  | Nama | Deskripsi |
-  |------|-----------|
-  | `name` | Nama panjang pengguna |
-  | `email` | E-mail pengguna |
-  | `password` | Kata sandi |
-
-  **Response:**
-  
-  Akan memberikan pesan berhasil jika pengguna berhasil didaftarkan.
-
-  **Contoh:**
-  ```json
-  {
-      "name": "Aldi Faris",
-      "email": "aldi@gmail.com",
-      "password": "12341234"
-  }
-  ```
-
-- `api/login` (POST):
-
-  Melakukan login untuk mendapatkan token akses.
-  
-  **Parameter JSON:**
-  | Nama | Deskripsi |
-  |------|-----------|
-  | `name` | Nama panjang pengguna |
-  | `email` | E-mail pengguna |
-  | `password` | Kata sandi |
-
-  **Response:**
-
-  Token akses API.
-
-  **Contoh:**
-  ```json
-  // Request
-  {
-      "name": "Aldi Faris",
-      "email": "aldi@gmail.com",
-      "password": "12341234"
-  }
-
-  // Response
-  {
-      "token": "5|6EVQecQ15GlLuYSXB84VuI4dFHK7jJ77a6HQ91bE"
-  }
-  ```
-
-- `api/logout` (GET):
-
-  Melakukan logout untuk menghapus token akses.
-
-  **Parameter GET:**
-  
-  *Tidak ada*
-
-  **Response:**
-  
-  Akan memberikan pesan berhasil jika token akses berhasil dihapus.
-
-  **Catatan:**
-
-  Token akses harus disertakan didalam request.
-  
+Tata cara penggunaan API dapat dilihat [disini](docs/APIDocs.md)
