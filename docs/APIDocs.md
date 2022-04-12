@@ -6,8 +6,8 @@
   - [Daftar Isi](#daftar-isi)
   - [Pendahuluan](#pendahuluan)
   - [API Autentikasi](#api-autentikasi)
-- [API Kategori](#api-kategori)
-- [API Buku](#api-buku)
+  - [API Kategori](#api-kategori)
+  - [API Buku](#api-buku)
 
 ### Pendahuluan
 
@@ -95,7 +95,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   Token akses harus disertakan didalam request.
 
-## API Kategori
+### API Kategori
 
 - `api/category/list` (GET/AUTH):
   
@@ -277,7 +277,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   Akan memberikan pesan berhasil jika kategori berhasil dihapus.
 
-## API Buku
+### API Buku
 
 - `api/book/list` (GET/AUTH):
   
