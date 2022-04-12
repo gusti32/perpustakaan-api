@@ -70,7 +70,7 @@ class AuthController extends Controller
 
         // Check the password
         if (!Hash::check($request->password, $user->password)) {
-            return ['errors' => 'Password salah.'];
+            return ['errors' => ['password' => 'Password salah.']];
         }
 
         // Revoke existing token

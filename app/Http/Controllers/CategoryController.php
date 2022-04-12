@@ -16,8 +16,7 @@ class CategoryController extends Controller
                 'list' => Category::find($request->id)
             ];
         }
-
-        if ($request->name) {
+        else if ($request->name) {
             return [
                 'msg' => 'Berhasil',
                 'list' => Category::where('name', 'like', "%{$request->name}%")->get()
