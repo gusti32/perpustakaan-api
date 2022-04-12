@@ -24,7 +24,7 @@ Selamat Mencoba!
 Berikut adalah cara kerja API ini:
 - Pengguna API harus melakukan registrasi dan login untuk mengakses dan menggunakan API.
 - Ketika pengguna me-request login, API akan memberikan response berupa token akses.
-- Pengguna dapat menggunakan token akses ini untuk mengakses API `api/category/*` dan `api/book/*` dengan menyertakan token tersebut didalam request.
+- Pengguna harus menggunakan token akses ini untuk mengakses API `api/category/*` dan `api/book/*` dengan menyertakan token tersebut didalam request.
 - `api/category/*` digunakan untuk mengelola kategori-kategori buku. 
 - `api/book/*` digunakan untuk mengelola buku. 
 - Jika pengguna sudah selesai menggunakan API, pengguna dapat me-request logout untuk menghapus token akses.
