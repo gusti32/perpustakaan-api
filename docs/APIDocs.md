@@ -11,11 +11,11 @@
 
 ### Pendahuluan
 
-Ketika melakukan request API yang membutuhkan token autentikasi (ditandai dengan AUTH), pengguna harus menyertakan token autentikasi didalam header HTTP, sebagai contoh:
+Ketika melakukan request API yang membutuhkan token autentikasi (ditandai dengan AUTH), pengguna harus menyertakan token autentikasi di dalam header HTTP, sebagai contoh:
 
 `Authorization: Bearer 5|6EVQecQ15GlLuYSXB84VuI4dFHK7jJ77a6HQ91bE`
 
-Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTTP header field `Content-Type` ke `application/json`.
+Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur field HTTP header `Content-Type` ke `application/json`.
 
 ### API Autentikasi
 
@@ -93,7 +93,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 ### API Kategori
 
@@ -174,7 +174,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 - `api/category/add` (POST/AUTH):
 
@@ -210,7 +210,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 - `api/category/edit` (POST/AUTH):
 
@@ -250,7 +250,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   // Response
   {
-      "msg": "Kategori berhasil diedit.",
+      "msg": "Kategori berhasil diubah.",
       "updated": {
           "id": 11,
           "name": "Sastra",
@@ -262,7 +262,7 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 - `api/category/del` (GET/AUTH):
   
@@ -286,116 +286,79 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
   **Parameter GET:**
   | Nama | Deskripsi | Opsional |
   |------|-----------|----------|
-  | `title` | Saring daftar buku berdasarkan judul. | Ya |
-  | `writer` | Saring daftar buku berdasarkan penulis. | Ya |
-  | `publisher` | Saring daftar buku berdasarkan penerbit. | Ya |
-  | `category_id` | Saring daftar buku berdasarkan ID kategori. | Ya |
+  | `title` | Menyaring daftar buku berdasarkan judul. | Ya |
+  | `writer` | Menyaring daftar buku berdasarkan penulis. | Ya |
+  | `publisher` | Menyaring daftar buku berdasarkan penerbit. | Ya |
+  | `category_id` | Menyaring daftar buku berdasarkan ID kategori. | Ya |
   | `limit` | Membatasi jumlah buku yang akan ditampilkan (jumlah default: 25). | Ya |
   | `page` | Halaman daftar buku yang akan ditampilkan. | Ya |
 
   **Response:**
   
-  Akan memberikan daftar kategori buku jika berhasil.
+  Akan memberikan daftar buku jika berhasil.
 
   **Contoh:**
   ```
-  api/book/list <- Menampilkan semua kategori yang ada pada database.
-  api/book/list?title=Agama <- Mencari dan menampilkan kategori yang cocok dengan judul "Agama".
-  ```
-
-  ```json
-  // Response dari: api/category/list
-  {
-      "msg": "Berhasil",
-      "list": [
-          {
-              "id": 1,
-              "name": "Agama",
-              "created_at": 1649733611,
-              "updated_at": 1649733611
-          },
-          {
-              "id": 2,
-              "name": "Bahasa",
-              "created_at": 1649733611,
-              "updated_at": 1649733611
-          },
-          {
-              "id": 3,
-              "name": "Biografi",
-              "created_at": 1649733611,
-              "updated_at": 1649733611
-          },
-          ......
-      ]
-  }
-
-  // Response dari: api/category/list?id=2
-  {
-      "msg": "Berhasil",
-      "list": [
-          {
-              "id": 2,
-              "name": "Bahasa",
-              "created_at": 1649733611,
-              "updated_at": 1649733611
-          }
-      ]
-  }
-
-  // Response dari: api/category/list?keyword=Agama
-  {
-      "msg": "Berhasil",
-      "list": [
-          {
-              "id": 1,
-              "name": "Agama",
-              "created_at": 1649733611,
-              "updated_at": 1649733611
-          }
-      ]
-  }
+  api/book/list :
+  Menampilkan semua buku yang ada pada database.
+  
+  api/book/list?title=Libero ut nam voluptas :
+  Menyaring dan menampilkan daftar buku yang cocok dengan judul "Libero ut nam voluptas".
+  
+  api/book/list?title=Libero ut nam voluptas&publisher=Art Extensions : 
+  Menyaring dan menampilkan daftar buku yang cocok dengan kombinasi judul dan penerbit.
   ```
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 - `api/book/add` (POST/AUTH):
 
-  Menambahkan buku baru.
+  Menambah buku baru.
 
-  **Parameter JSON:**
   | Nama | Deskripsi | Opsional |
   |------|-----------|----------|
-  | `name` | Nama kategori (harus unik) | Tidak |
+  | `title` | Judul buku. | Ya |
+  | `writer` | Nama lengkap penulis buku. | Ya |
+  | `publisher` | Nama perusahaan yang menerbitkan buku. | Ya |
+  | `publication_year` | Tahun terbit buku. | Ya |
+  | `category_id` | ID kategori buku. | Ya |
 
   **Response:**
 
-  Akan memberikan pesan berhasil dan menampilkan data yang ditambahkan.
+  Akan memberikan pesan berhasil dan menampilkan data buku yang ditambahkan.
 
   **Contoh:**
   ```json
   // Request
   {
-      "name": "Matematika"
+      "title": "Buku saya",
+      "writer": "Muhammad Gusti Nurfathin",
+      "publisher": "PT Shaderboi",
+      "publication_year": "2010",
+      "category_id": "4"
   }
 
   // Response
   {
-      "msg": "Kategori berhasil ditambahkan.",
+      "msg": "Buku berhasil ditambahkan.",
       "added": {
-          "name": "Matematika",
-          "updated_at": 1649770464,
-          "created_at": 1649770464,
-          "id": 11
+          "title": "Buku saya",
+          "writer": "Muhammad Gusti Nurfathin",
+          "publisher": "PT Shaderboi",
+          "publication_year": "2010",
+          "category_id": "4",
+          "updated_at": "2022-04-13T15:12:45.000000Z",
+          "created_at": "2022-04-13T15:12:45.000000Z",
+          "id": 51
       }
   }
   ```
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 - `api/book/edit` (POST/AUTH):
 
@@ -404,50 +367,57 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
   **Parameter JSON:**
   | Nama | Deskripsi | Opsional |
   |------|-----------|----------|
-  | `id` | ID yang mewakili kategori yang akan diedit. | Tidak |
-  | `name` | Nama kategori (harus unik) | Ya |
+  | `id` | ID yang mewakili buku yang akan diedit. | Tidak |
 
   **Response:**
 
-  Akan memberikan pesan berhasil dan menampilkan hasil kategori yang diedit.
+  Akan memberikan pesan berhasil dan menampilkan hasil data buku yang diedit.
 
   **Contoh:**
 
-  Data kategori sebelum diedit:
+  Data buku sebelum diedit:
 
   ```json
   {
-      "name": "Matematika",
-      "updated_at": 1649770464,
-      "created_at": 1649770464,
-      "id": 11
-  } 
+      "title": "Buku saya",
+      "writer": "Muhammad Gusti Nurfathin",
+      "publisher": "PT Shaderboi",
+      "publication_year": "2010",
+      "category_id": "4",
+      "updated_at": "2022-04-13T15:12:45.000000Z",
+      "created_at": "2022-04-13T15:12:45.000000Z",
+      "id": 51
+  }
   ```
 
-  Melakukan pengeditan kategori:
+  Melakukan pengubahan buku:
 
   ```json
-  // Request
+  // Request (Mengganti judul buku)
   {
-      "id": 11,
-      "name": "Sastra"
+      "id": 51,
+      "title": "Sastra Indonesia"
   }
 
   // Response
   {
-      "msg": "Kategori berhasil diedit.",
+      "msg": "Buku berhasil diubah.",
       "updated": {
-          "id": 11,
-          "name": "Sastra",
-          "created_at": 1649770464,
-          "updated_at": 1649771063
+          "id": 51,
+          "title": "Sastra Indonesia",
+          "writer": "Muhammad Gusti Nurfathin",
+          "publisher": "PT Shaderboi",
+          "publication_year": "2010",
+          "category_id": 4,
+          "created_at": "2022-04-13T15:12:45.000000Z",
+          "updated_at": "2022-04-13T15:15:35.000000Z"
       }
   }
   ```
 
   **Catatan:**
 
-  Token akses harus disertakan didalam request.
+  Token akses harus disertakan di dalam request.
 
 - `api/book/del` (GET/AUTH):
   
@@ -456,8 +426,12 @@ Untuk me-request API POST, pengguna harus menggunakan data JSON dan mengatur HTT
   **Parameter GET:**
   | Nama | Deskripsi | Opsional |
   |------|-----------|----------|
-  | `id` | ID yang mewakili kategori yang akan dihapus. | Ya |
+  | `id` | ID yang mewakili buku yang akan dihapus. | Ya |
 
   **Response:**
 
-  Akan memberikan pesan berhasil jika kategori berhasil dihapus.
+  Akan memberikan pesan berhasil jika buku berhasil dihapus.
+
+  **Catatan:**
+
+  Token akses harus disertakan di dalam request.
